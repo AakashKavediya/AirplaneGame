@@ -6,6 +6,7 @@ function preload() {
     station = loadImage("img/station.png");
     shop = loadImage("img/shop.png");
     aeroplane = loadImage("img/plane.png");
+    roads = loadImage("img/road.jpg");
 }
 
 function setup() {
@@ -41,6 +42,10 @@ function setup() {
     shops = createSprite(10490, 600);
     shops.scale = 0.6;
     shops.addImage(shop);
+
+    road = createSprite(5000, 1270);
+    road.scale = 2.7;
+    road.addImage(roads);
 
     plane = createSprite(270, 950);
     plane.scale = 0.5;
