@@ -7,13 +7,18 @@ function preload() {
     shop = loadImage("img/shop.png");
     aeroplane = loadImage("img/plane.png");
     roads = loadImage("img/road.jpg");
+    takeoff = loadSound("sound/airplane+cessna.wav");
 }
 
 function setup() {
-    createCanvas(11000, 1000);
-    man = createSprite(5000, 500);
+    createCanvas(7600, 1000);
+    man = createSprite(3000, 500);
     man.scale = 3.6;
     man.addImage(sky);
+
+    road = createSprite(5000, 1270);
+    road.scale = 2.7;
+    road.addImage(roads);
 
     stations = createSprite(400, 580);
     stations.scale = 0.6;
@@ -31,21 +36,17 @@ function setup() {
     build3.scale = 0.6;
     build3.addImage(building);
 
-    build4 = createSprite(7400, 350);
-    build4.scale = 0.6;
-    build4.addImage(building);
+    stations = createSprite(7250, 580);
+    stations.scale = 0.6;
+    stations.addImage(station);
 
-    build5 = createSprite(9300, 350);
-    build5.scale = 0.6;
-    build5.addImage(building);
+    // build5 = createSprite(9300, 350);
+    // build5.scale = 0.6;
+    // build5.addImage(building);
 
-    shops = createSprite(10490, 600);
-    shops.scale = 0.6;
-    shops.addImage(shop);
-
-    road = createSprite(5000, 1270);
-    road.scale = 2.7;
-    road.addImage(roads);
+    // shops = createSprite(10490, 600);
+    // shops.scale = 0.6;
+    // shops.addImage(shop);
 
     plane = createSprite(270, 950);
     plane.scale = 0.5;
@@ -58,14 +59,17 @@ function draw() {
 
     if (keyDown("d")) {
         plane.x = plane.x + 15;
+        takeoff.play();
     }
     if (keyDown("w")) {
         plane.y = plane.y - 15;
+        takeoff.play();
     }
     if (keyDown("s")) {
         plane.y = plane.y + 15;
+        takeoff.play();
     }
     if (keyDown("space")) {
-        plane.x = plane.x + 55;
+        plane.x = plane.x + 20;
     }
 }
