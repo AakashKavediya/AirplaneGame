@@ -8,10 +8,11 @@ function preload() {
     aeroplane = loadImage("img/plane.png");
     roads = loadImage("img/road.jpg");
     takeoff = loadSound("sound/airplane+cessna.wav");
+    birds = loadImage("img/flyingBird.gif");
 }
 
 function setup() {
-    createCanvas(7600, 1000);
+    createCanvas(7600, 1050);
     man = createSprite(3000, 500);
     man.scale = 3.6;
     man.addImage(sky);
@@ -40,13 +41,9 @@ function setup() {
     stations.scale = 0.6;
     stations.addImage(station);
 
-    // build5 = createSprite(9300, 350);
-    // build5.scale = 0.6;
-    // build5.addImage(building);
-
-    // shops = createSprite(10490, 600);
-    // shops.scale = 0.6;
-    // shops.addImage(shop);
+    // bird = createSprite(7250, 580);
+    // bird.scale = 01;
+    // bird.addImage(birds);
 
     plane = createSprite(270, 950);
     plane.scale = 0.5;
@@ -70,6 +67,12 @@ function draw() {
         takeoff.play();
     }
     if (keyDown("space")) {
-        plane.x = plane.x + 20;
+        plane.x = plane.x + 50;
+    }
+
+    if (plane.isTouching(stations)) {
+        plane.velocityX = 0;
+        textSize(150);
+        text("You Win", 7000, 140);
     }
 }
