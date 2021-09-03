@@ -8,7 +8,11 @@ function preload() {
     aeroplane = loadImage("img/plane.png");
     roads = loadImage("img/road.jpg");
     takeoff = loadSound("sound/airplane+cessna.wav");
+    crash = loadSound("sound/crash.wav");
+    loud = loadSound("sound/voice1.wav");
     birds = loadImage("img/flyingBird.gif");
+    human = loadImage("img/man.png");
+    planes = loadImage("img/return.png");
 }
 
 function setup() {
@@ -48,6 +52,9 @@ function setup() {
     plane = createSprite(270, 950);
     plane.scale = 0.5;
     plane.addImage(aeroplane);
+
+    planeGroup = new Group();
+    manGroup = new Group();
 }
 
 function draw() {
@@ -67,12 +74,63 @@ function draw() {
         takeoff.play();
     }
     if (keyDown("space")) {
-        plane.x = plane.x + 50;
+        plane.x = plane.x + 80;
     }
 
     if (plane.isTouching(stations)) {
         plane.velocityX = 0;
         textSize(150);
         text("You Win", 7000, 140);
+        manGroup.velocityX = 0;
+    }
+
+    generatePlane();
+    for (var i = 0; i < planeGroup.length; i++) {
+        var temp = planeGroup.get(i);
+
+        if (temp.isTouching(plane)) {
+            crash.play();
+            // coinScore++;
+            temp.destroy();
+            temp = null;
+        }
+    }
+
+    generateHumans();
+    for (var i = 0; i < manGroup.length; i++) {
+        var temp = manGroup.get(i);
+
+        if (temp.isTouching(plane)) {
+            loud.play();
+            // coinScore++;
+            temp.destroy();
+            temp = null;
+        }
+    }
+}
+
+function generatePlane() {
+    if (frameCount % 70 === 0) {
+        var play = createSprite(8000, 1);
+        play.y = random(20, 700);
+        play.addImage(planes);
+        play.scale = 0.5;
+        play.velocityX = -20;
+
+        play.lifetime = 8000;
+        planeGroup.add(play);
+    }
+}
+
+function generateHumans() {
+    if (frameCount % 40 === 0) {
+        var can = createSprite(6500, 800);
+        can.y = random(995, 810);
+        can.addImage(human);
+        can.scale = 0.045;
+        can.velocityX = -15;
+
+        can.lifetime = 8000;
+        manGroup.add(can);
     }
 }
