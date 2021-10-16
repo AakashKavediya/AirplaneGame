@@ -13,6 +13,8 @@ function preload() {
     birds = loadImage("img/flyingBird.gif");
     human = loadImage("img/man.png");
     planes = loadImage("img/return.png");
+    crops = loadImage("img/Crop.png");
+    jet = loadImage("img/jet.png");
 }
 
 function setup() {
@@ -51,7 +53,7 @@ function setup() {
 
     plane = createSprite(270, 950);
     plane.scale = 0.5;
-    plane.addImage(aeroplane);
+    plane.addImage(crops);
 
     planeGroup = new Group();
     manGroup = new Group();
